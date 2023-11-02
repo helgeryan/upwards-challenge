@@ -14,22 +14,50 @@ protocol SortMenuDelegate {
 class SortMenu: UIView {
     // MARK: - Properites
     var delegate: SortMenuDelegate?
+    var sortTypes: [String] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
     // MARK: - UI Elements
-    @IBOutlet weak var titleSortButton: UIButton!
-    @IBOutlet weak var albumSortButton: UIButton!
+    @IBOutlet weak var tableView: UITableView!
     
     // MARK: - Life Cycle
-    override func draw(_ rect: CGRect) {
-        super.draw(rect)
+    
+    func setupMenu(delegate: SortMenuDelegate, sortTypes: [String]) {
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.delegate = self
+        tableView.dataSource = self
+        self.sortTypes = sortTypes
+        self.delegate = delegate
     }
     
-    // MARK: - Actions
-    @IBAction func doTitleSort(_ sender: Any) {
-        delegate?.selectedSortType(type: "title")
+}
+
+// MARK: - UITableViewDataSource
+extension SortMenu: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        sortTypes.count
     }
     
-    @IBAction func doAlbumSort(_ sender: Any) {
-        delegate?.selectedSortType(type: "album")
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let album = sortTypes[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.textLabel?.text = album
+        cell.backgroundColor = .white
+        cell.textLabel?.textColor = .black
+                
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let album = sortTypes[indexPath.row]
+        delegate?.selectedSortType(type: album)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50.0
     }
 }

@@ -15,43 +15,23 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="248"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jgW-OE-HKW" userLabel="AlbumSortButton">
-                    <rect key="frame" x="0.0" y="124" width="393" height="124"/>
-                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                    <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                    <state key="normal" title="Title"/>
-                    <connections>
-                        <action selector="doAlbumSort:" destination="iN0-l3-epB" eventType="touchUpInside" id="zai-hd-ZYH"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RVD-fN-5lS" userLabel="TitleSortButton">
-                    <rect key="frame" x="0.0" y="0.0" width="393" height="124"/>
-                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                    <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                    <state key="normal" title="Album"/>
-                    <connections>
-                        <action selector="doTitleSort:" destination="iN0-l3-epB" eventType="touchUpInside" id="fpU-j8-fIb"/>
-                    </connections>
-                </button>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="30I-S1-lj9">
+                    <rect key="frame" x="0.0" y="0.0" width="393" height="248"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="jgW-OE-HKW" firstAttribute="top" secondItem="RVD-fN-5lS" secondAttribute="bottom" id="4ze-Pk-vEk"/>
-                <constraint firstAttribute="trailing" secondItem="RVD-fN-5lS" secondAttribute="trailing" id="Lg2-AS-knk"/>
-                <constraint firstItem="RVD-fN-5lS" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="N9g-Dg-5g5"/>
-                <constraint firstItem="RVD-fN-5lS" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="PCx-4X-pq4"/>
-                <constraint firstItem="jgW-OE-HKW" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="YD4-LM-Ccy"/>
-                <constraint firstItem="jgW-OE-HKW" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="ccv-c4-b0A"/>
-                <constraint firstItem="RVD-fN-5lS" firstAttribute="height" secondItem="jgW-OE-HKW" secondAttribute="height" id="dZ9-vg-wkF"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="jgW-OE-HKW" secondAttribute="bottom" id="lPs-DX-ej1"/>
+                <constraint firstItem="30I-S1-lj9" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="1Z5-ZB-C2T"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="30I-S1-lj9" secondAttribute="trailing" id="8R6-CY-Wuf"/>
+                <constraint firstAttribute="bottom" secondItem="30I-S1-lj9" secondAttribute="bottom" id="cvQ-RU-LEo"/>
+                <constraint firstItem="30I-S1-lj9" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="hxN-TG-b2c"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="albumSortButton" destination="jgW-OE-HKW" id="2Su-6T-P7G"/>
-                <outlet property="titleSortButton" destination="RVD-fN-5lS" id="yAH-f6-P5M"/>
+                <outlet property="tableView" destination="30I-S1-lj9" id="DfK-Ff-b3p"/>
             </connections>
             <point key="canvasLocation" x="-66.412213740458014" y="-337.32394366197184"/>
         </view>

@@ -39,18 +39,19 @@ final class TopAlbumsViewController: UIViewController {
             tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
-        
+        var sortTypes = ["Album", "Title", "ID","Album", "Title", "ID"]
+        sortMenu.setupMenu(delegate: self, sortTypes: sortTypes)
         sortMenu.backgroundColor = .white
-        sortMenu.delegate = self
         sortMenu.alpha = 0
         sortMenu.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(sortMenu)
         sortMenuTopConstraint = sortMenu.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
         
+        let sortMenuHeight: CGFloat = sortTypes.count < 5 ?  CGFloat(sortTypes.count) * 50.0 : 250.0
         NSLayoutConstraint.activate([
             sortMenuTopConstraint!,
             sortMenu.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            sortMenu.heightAnchor.constraint(equalToConstant: 100),
+            sortMenu.heightAnchor.constraint(equalToConstant: sortMenuHeight),
             sortMenu.widthAnchor.constraint(equalToConstant: 200),
         ])
         
