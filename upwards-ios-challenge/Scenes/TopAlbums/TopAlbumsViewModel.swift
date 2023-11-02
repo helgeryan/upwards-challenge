@@ -37,4 +37,12 @@ final class TopAlbumViewModel {
         }
     }
     
+    func sortData(type: String) {
+        if type == "title" {
+            albums.sort(by: { return $0.name < $1.name })
+        } else {
+            albums.sort(by: { return $0.artistName < $1.artistName })
+        }
+    }
+    
 }
