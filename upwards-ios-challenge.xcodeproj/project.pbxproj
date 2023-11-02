@@ -20,6 +20,7 @@
 		CEE8744C26E818C000A269DA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE8744B26E818C000A269DA /* SceneDelegate.swift */; };
 		CEE8745326E818C500A269DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEE8745226E818C500A269DA /* Assets.xcassets */; };
 		CEE8745626E818C500A269DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEE8745426E818C500A269DA /* LaunchScreen.storyboard */; };
+		E63D3B2E2AF4130F00B7E84C /* TopAlbumsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63D3B2D2AF4130F00B7E84C /* TopAlbumsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		CEE8745226E818C500A269DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CEE8745526E818C500A269DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CEE8745726E818C500A269DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E63D3B2D2AF4130F00B7E84C /* TopAlbumsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopAlbumsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 			children = (
 				CED2A3F126F00DD20093C1F3 /* TopAlbumTableViewCell.swift */,
 				CED2A3EF26F000F60093C1F3 /* TopAlbumsViewController.swift */,
+				E63D3B2D2AF4130F00B7E84C /* TopAlbumsViewModel.swift */,
 			);
 			path = TopAlbums;
 			sourceTree = "<group>";
@@ -203,6 +206,7 @@
 				CED2A3F226F00DD20093C1F3 /* TopAlbumTableViewCell.swift in Sources */,
 				CED2A3E426EFA9610093C1F3 /* ITunesAPI.swift in Sources */,
 				CED2A3F526F017330093C1F3 /* Network.swift in Sources */,
+				E63D3B2E2AF4130F00B7E84C /* TopAlbumsViewModel.swift in Sources */,
 				CED2A3E626EFAA5C0093C1F3 /* Album.swift in Sources */,
 				CED2A3EB26EFB7210093C1F3 /* APIErrors.swift in Sources */,
 				CEE8744A26E818C000A269DA /* AppDelegate.swift in Sources */,

@@ -9,16 +9,11 @@ import UIKit
 
 final class TopAlbumsViewController: UIViewController {
     
-    private let iTunesAPI: ITunesAPI
+    private let viewModel: TopAlbumViewModel
     private let tableView = UITableView()
-    private var albums = [Album]() {
-        didSet {
-            tableView.reloadData()
-        }
-    }
     
-    init(iTunesAPI: ITunesAPI) {
-        self.iTunesAPI = iTunesAPI
+    init(viewModel: TopAlbumViewModel) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -42,36 +37,33 @@ final class TopAlbumsViewController: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
         
-        loadData()
+        viewModel.loadData()
+        
     }
     
-    private func loadData() {
-        iTunesAPI.getTopAlbums(limit: 10) { [weak self] res in
-            switch res {
-            case .success(let data):
-                DispatchQueue.main.async {
-                    self?.albums = data.feed.results
-                }
-            case .failure(let err):
-                debugPrint(err)
-            }
-        }
-    }
-    
+
 }
 
 // MARK: - UITableViewDataSource
 extension TopAlbumsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        albums.count
+        viewModel.albums.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let album = albums[indexPath.row]
+        let album = viewModel.albums[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: TopAlbumTableViewCell.description(), for: indexPath) as! TopAlbumTableViewCell
         cell.albumLabel.text = album.name
         cell.artistNameLabel.text = album.artistName
                 
         return cell
     }
+}
+
+extension TopAlbumsViewController: TopAlbumViewModelDelegate {
+    func dataFinishedLoading() {
+        tableView.reloadData()
+    }
+    
+    
 }
