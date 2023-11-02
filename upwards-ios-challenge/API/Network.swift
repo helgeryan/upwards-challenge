@@ -41,7 +41,7 @@ final class Network: NSObject, Networking, URLSessionDelegate {
                 let d = data,
                 (200..<300) ~= httpResponse.statusCode
             else {
-                completion(.failure(APIErrors.custom("Failed to api response")))
+                completion(.failure(APIErrors.invalidResponse(err)))
                 return
             }
             
@@ -70,7 +70,7 @@ final class Network: NSObject, Networking, URLSessionDelegate {
                 return date
             }
             
-            throw APIErrors.custom("Invalid date")
+            throw APIErrors.custom(dateStr)
         })
     }
 }
