@@ -8,13 +8,13 @@
 import UIKit
 
 protocol SortMenuDelegate {
-    func selectedSortType(type: String)
+    func selectedSortType(type: SortType)
 }
 
 class SortMenu: UIView {
     // MARK: - Properites
     var delegate: SortMenuDelegate?
-    var sortTypes: [String] = [] {
+    var sortTypes: [SortType] = [] {
         didSet {
             tableView.reloadData()
         }
@@ -25,8 +25,8 @@ class SortMenu: UIView {
     
     // MARK: - Life Cycle
     
-    func setupMenu(delegate: SortMenuDelegate, sortTypes: [String]) {
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+    func setupMenu(delegate: SortMenuDelegate, sortTypes: [SortType]) {
+        tableView.register(SortMenuTableViewCell.self, forCellReuseIdentifier: SortMenuTableViewCell.description())
         tableView.delegate = self
         tableView.dataSource = self
         self.sortTypes = sortTypes
@@ -42,19 +42,17 @@ extension SortMenu: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let album = sortTypes[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = album
-        cell.backgroundColor = .white
-        cell.textLabel?.textColor = .black
+        let sort = sortTypes[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: SortMenuTableViewCell.description(), for: indexPath) as! SortMenuTableViewCell
+        cell.sortLabel.text = sort.title
                 
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let album = sortTypes[indexPath.row]
-        delegate?.selectedSortType(type: album)
+        let sort = sortTypes[indexPath.row]
+        delegate?.selectedSortType(type: sort)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

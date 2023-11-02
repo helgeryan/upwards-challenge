@@ -28,6 +28,15 @@ final class TopAlbumsViewController: UIViewController {
         super.viewDidLoad()
      
         navigationItem.title = "Top Albums"
+    
+        configureTableView()
+        configureSortMenu()
+        configureRightBarButtonItem()
+        
+        viewModel.loadData()
+    }
+    
+    private func configureTableView() {
         tableView.dataSource = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(TopAlbumTableViewCell.self, forCellReuseIdentifier: TopAlbumTableViewCell.description())
@@ -39,7 +48,10 @@ final class TopAlbumsViewController: UIViewController {
             tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
-        var sortTypes = ["Album", "Title", "ID","Album", "Title", "ID"]
+    }
+    
+    private func configureSortMenu() {
+        let sortTypes = AlbumSortType.allCases
         sortMenu.setupMenu(delegate: self, sortTypes: sortTypes)
         sortMenu.backgroundColor = .white
         sortMenu.alpha = 0
@@ -54,16 +66,18 @@ final class TopAlbumsViewController: UIViewController {
             sortMenu.heightAnchor.constraint(equalToConstant: sortMenuHeight),
             sortMenu.widthAnchor.constraint(equalToConstant: 200),
         ])
-        
-        
+    }
+    
+    func configureRightBarButtonItem() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "text.alignleft"), style: .done, target: self, action: #selector(toggleSortMenu))
         self.navigationController?.navigationBar.tintColor = .white
         
-        viewModel.loadData()
-        
     }
     
-    @objc func toggleSortMenu() {
+    
+    // MARK: - Actions
+    
+    @objc private func toggleSortMenu() {
         isShowingSortMenu = !isShowingSortMenu
         
         UIView.animate(withDuration: 0.1, animations: {
@@ -98,10 +112,12 @@ extension TopAlbumsViewController: TopAlbumViewModelDelegate {
 
 // MARK: - Sort Menu Delegate
 extension TopAlbumsViewController: SortMenuDelegate {
-    func selectedSortType(type: String) {
+    func selectedSortType(type: SortType) {
         if isShowingSortMenu {
             toggleSortMenu()
         }
-        viewModel.sortData(type: type)
+        if let albumSortType = type as? AlbumSortType {
+            viewModel.sortData(type: albumSortType)
+        }
     }
 }
