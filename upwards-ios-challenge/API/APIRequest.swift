@@ -17,14 +17,14 @@ struct APIRequest: Request {
 
     func asURLRequest() throws -> URLRequest {
         guard let apiURL = URL(string: url) else {
-            throw APIErrors.custom("Invalid URL \(url)")
+            throw APIErrors.invalidURL(url)
         }
         
         var urlComponents = URLComponents(url: apiURL, resolvingAgainstBaseURL: false)
         urlComponents?.queryItems = params
         
         guard let requestURL = urlComponents?.url else {
-            throw APIErrors.custom("Invalid url")
+            throw APIErrors.invalidParameters(params ?? [])
         }
 
         var request = URLRequest(url: requestURL)
