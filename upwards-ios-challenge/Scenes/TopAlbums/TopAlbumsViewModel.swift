@@ -37,4 +37,8 @@ final class TopAlbumViewModel {
         }
     }
     
+    func sortData(type: AlbumSortType) {
+        albums.sort(by: type.sort)
+    }
+    
 }
