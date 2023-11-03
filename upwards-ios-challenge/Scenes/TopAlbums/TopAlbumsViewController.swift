@@ -12,7 +12,6 @@ final class TopAlbumsViewController: UIViewController {
     
     private let viewModel: TopAlbumViewModel
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-    private let tableView = UITableView()
     private let lottieView = LottieAnimationView()
     private let sortMenu: SortMenu = .fromNib()
     private var isShowingSortMenu: Bool = false
@@ -32,8 +31,6 @@ final class TopAlbumsViewController: UIViewController {
      
         view.backgroundColor = .darkGray
         navigationItem.title = "Top Albums"
-        navigationController?.navigationBar.barTintColor = .black
-        navigationController?.navigationBar.tintColor = .black
     
         configureCollectionView()
         configureLoaderView()
@@ -125,7 +122,7 @@ extension TopAlbumsViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension TopAlbumsViewController: UICollectionViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
@@ -142,29 +139,12 @@ extension TopAlbumsViewController: UICollectionViewDataSource {
     }
 }
 
-// MARK: - UITableViewDataSource
-extension TopAlbumsViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.albums.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let album = viewModel.albums[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: TopAlbumTableViewCell.description(), for: indexPath) as! TopAlbumTableViewCell
-        cell.albumLabel.text = album.name
-        cell.artistNameLabel.text = album.artistName
-
-        return cell
-    }
-}
-
 // MARK: - Top Album Delegate
 extension TopAlbumsViewController: TopAlbumViewModelDelegate {
     func dataFinishedLoading() {
         lottieView.stop()
         lottieView.isHidden = true
         collectionView.reloadData()
-        tableView.reloadData()
     }
 }
 

@@ -12,6 +12,7 @@ class TopAlbumCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var albumLabel: UILabel!
     @IBOutlet weak var artistLabel: UILabel!
     @IBOutlet weak var albumImageView: UIImageView!
+    @IBOutlet weak var newIconView: UIView!
     
     var album: Album? {
         didSet {
@@ -31,6 +32,13 @@ class TopAlbumCollectionViewCell: UICollectionViewCell {
             albumLabel.text = album.name
             artistLabel.text = album.artistName
             
+            newIconView.isHidden = !album.isNew
+            loadImage()
+        }
+    }
+    
+    private func loadImage() {
+        if let album = album {
             if let imageUrl = album.artworkUrl100,
                 let url = URL(string: imageUrl) {
                 DispatchQueue.global(qos: .userInteractive).async {
@@ -53,6 +61,7 @@ class TopAlbumCollectionViewCell: UICollectionViewCell {
         albumLabel.text = ""
         artistLabel.text = ""
         albumImageView.image = nil
+        
     }
 
 }

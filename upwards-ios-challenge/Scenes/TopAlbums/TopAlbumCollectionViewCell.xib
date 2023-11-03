@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -45,6 +46,34 @@
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5jo-BR-Jn7">
+                        <rect key="frame" x="234" y="8" width="42" height="22"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HH3-7D-Uiu">
+                                <rect key="frame" x="4" y="0.66666666666666607" width="34" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="34" id="1i6-Jx-8A3"/>
+                                    <constraint firstAttribute="height" constant="21" id="tyU-ec-Hpa"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <color key="textColor" systemColor="systemOrangeColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.8666666666666667" green="0.8666666666666667" blue="0.8666666666666667" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="HH3-7D-Uiu" firstAttribute="centerX" secondItem="5jo-BR-Jn7" secondAttribute="centerX" id="2td-wC-8IP"/>
+                            <constraint firstAttribute="trailing" secondItem="HH3-7D-Uiu" secondAttribute="trailing" constant="4" id="MIA-6W-AU3"/>
+                            <constraint firstItem="HH3-7D-Uiu" firstAttribute="leading" secondItem="5jo-BR-Jn7" secondAttribute="leading" constant="4" id="OvL-Gu-pFO"/>
+                            <constraint firstAttribute="height" constant="22" id="Pdb-XT-0gp"/>
+                            <constraint firstItem="HH3-7D-Uiu" firstAttribute="centerY" secondItem="5jo-BR-Jn7" secondAttribute="centerY" id="Qeo-XI-dZJ"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
@@ -61,6 +90,8 @@
                 <constraint firstAttribute="trailing" secondItem="fHx-H6-0y5" secondAttribute="trailing" id="hTu-zn-Boc"/>
                 <constraint firstItem="jbG-eh-X59" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="iJq-q8-hTc"/>
                 <constraint firstItem="fHx-H6-0y5" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="k5o-GP-UKC"/>
+                <constraint firstItem="5jo-BR-Jn7" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="mWd-eM-e7j"/>
+                <constraint firstAttribute="trailing" secondItem="5jo-BR-Jn7" secondAttribute="trailing" constant="8" id="xEf-uI-SQQ"/>
                 <constraint firstItem="sTl-Kx-KrM" firstAttribute="top" secondItem="jbG-eh-X59" secondAttribute="bottom" constant="10" id="yK0-iL-q50"/>
                 <constraint firstItem="jbG-eh-X59" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="ytw-RA-8nG"/>
             </constraints>
@@ -69,8 +100,14 @@
                 <outlet property="albumImageView" destination="jbG-eh-X59" id="UrE-RF-0lc"/>
                 <outlet property="albumLabel" destination="sTl-Kx-KrM" id="hQ4-95-oaf"/>
                 <outlet property="artistLabel" destination="Wb1-Vi-6LV" id="TOp-KW-Beg"/>
+                <outlet property="newIconView" destination="5jo-BR-Jn7" id="uX7-Aa-OGM"/>
             </connections>
-            <point key="canvasLocation" x="93.129770992366403" y="126.05633802816902"/>
+            <point key="canvasLocation" x="93.129770992366403" y="125.70422535211269"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>
