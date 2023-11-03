@@ -31,6 +31,7 @@
 		E63D3B432AF4838100B7E84C /* TopAlbumCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E63D3B412AF4838100B7E84C /* TopAlbumCollectionViewCell.xib */; };
 		E63D3B492AF48CED00B7E84C /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = E63D3B482AF48CED00B7E84C /* Lottie */; };
 		E63D3B4B2AF48E5C00B7E84C /* Spinner.json in Resources */ = {isa = PBXBuildFile; fileRef = E63D3B4A2AF48E5C00B7E84C /* Spinner.json */; };
+		E63D3B4D2AF49B9000B7E84C /* UIView+IBDesignables.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63D3B4C2AF49B9000B7E84C /* UIView+IBDesignables.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,7 @@
 		E63D3B402AF4838100B7E84C /* TopAlbumCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopAlbumCollectionViewCell.swift; sourceTree = "<group>"; };
 		E63D3B412AF4838100B7E84C /* TopAlbumCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopAlbumCollectionViewCell.xib; sourceTree = "<group>"; };
 		E63D3B4A2AF48E5C00B7E84C /* Spinner.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Spinner.json; sourceTree = "<group>"; };
+		E63D3B4C2AF49B9000B7E84C /* UIView+IBDesignables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+IBDesignables.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				E63D3B332AF41BB400B7E84C /* UIView+extensions.swift */,
+				E63D3B4C2AF49B9000B7E84C /* UIView+IBDesignables.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 				CED2A3DE26EFA89C0093C1F3 /* Request.swift in Sources */,
 				E63D3B3C2AF430F200B7E84C /* SortType.swift in Sources */,
 				E63D3B422AF4838100B7E84C /* TopAlbumCollectionViewCell.swift in Sources */,
+				E63D3B4D2AF49B9000B7E84C /* UIView+IBDesignables.swift in Sources */,
 				CED2A3F026F000F60093C1F3 /* TopAlbumsViewController.swift in Sources */,
 				CED2A3F226F00DD20093C1F3 /* TopAlbumTableViewCell.swift in Sources */,
 				E63D3B3A2AF4307800B7E84C /* AlbumSortType.swift in Sources */,

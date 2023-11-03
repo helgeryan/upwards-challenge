@@ -23,6 +23,16 @@ struct Album: Decodable {
     var artworkUrl100: String?
     var artistName: String
     var releaseDate: Date
+    
+    var isNew: Bool {
+        let date = Date() // Current Date
+        if let days = Calendar.current.dateComponents([.day], from: self.releaseDate, to: date).day {
+            // If the day is in the future, it is new
+            return days < 0
+        } else {
+            return false
+        }
+    }
 }
 
 // MARK: - AlbumFeed
