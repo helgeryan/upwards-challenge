@@ -22,8 +22,8 @@ final class Network: NSObject, Networking, URLSessionDelegate {
         configureDecoder()
     }
     
-    func requestObject<T: Decodable>(_ request: Request, completion: @escaping (Result<T, Error>) -> ()) {
-        requestData(request) { res in
+    func requestObject<T: Decodable>(_ router: ITunesRouter, completion: @escaping (Result<T, Error>) -> ()) {
+        requestData(router) { res in
             completion(
                 res.flatMap { data in
                     Result {
@@ -34,8 +34,8 @@ final class Network: NSObject, Networking, URLSessionDelegate {
         }
     }
     
-    func requestData(_ request: Request, completion: @escaping (Result<Data, Error>) -> ()) {
-        let task = session.dataTask(with: try! addLog(request).asURLRequest()) { (data, res, err) in
+    func requestData(_ router: ITunesRouter, completion: @escaping (Result<Data, Error>) -> ()) {
+        let task = session.dataTask(with: try! addLog(router).asURLRequest()) { (data, res, err) in
             guard
                 let httpResponse = res as? HTTPURLResponse,
                 let d = data,
@@ -50,9 +50,9 @@ final class Network: NSObject, Networking, URLSessionDelegate {
         task.resume()
     }
 
-    private func addLog(_ request: Request) -> Request {
-        os_log("%s", log: general, type: .debug, request.description)
-        return request
+    private func addLog(_ router: ITunesRouter) -> ITunesRouter {
+        os_log("%s", log: general, type: .debug, router.description)
+        return router
     }
     
     private func configureDecoder() {

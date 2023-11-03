@@ -7,8 +7,6 @@
 
 import Foundation
 
-let baseURL = "https://rss.applemarketingtools.com"
-
 final class ITunesAPI {
     
     private let network: Networking
@@ -18,7 +16,7 @@ final class ITunesAPI {
     }
     
     func getTopAlbums(limit: Int = 10, completion: @escaping (Result<AlbumFeed, Error>) -> ())  {
-        let request = APIRequest(url: "\(baseURL)/api/v2/us/music/most-played/\(limit)/albums.json")
-        network.requestObject(request, completion: completion)
+        let router = ITunesApiAction.getAlbums(count: limit)
+        network.requestObject(router, completion: completion)
     }
 }
