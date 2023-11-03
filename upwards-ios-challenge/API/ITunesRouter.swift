@@ -1,30 +1,35 @@
 //
-//  APIRequest.swift
-//  upwards-ios-challenge
+//  NFLRouter.swift
+//  nbaApp
 //
-//  Created by Alex Livenson on 9/13/21.
+//  Created by Ryan Helgeson on 8/2/23.
 //
 
 import Foundation
 
-struct APIRequest: Request {
+protocol ITunesRouter {
+    var method: HTTPMethod { get }
+    var path: String { get }
+    var baseUrl: String { get }
+    var parameters: [URLQueryItem]? { get }
+    var headers: [String: String]? { get }
+    var body: Data? { get }
+    func asURLRequest() throws -> URLRequest
+    var description: String { get }
+}
 
-    var url: String
-    var method: HTTPMethod = .get
-    var headers: [String: String]? = nil
-    var params: [URLQueryItem]?
-    var body: Data? = nil
-
+extension ITunesRouter {
     func asURLRequest() throws -> URLRequest {
+        let url = baseUrl + path
         guard let apiURL = URL(string: url) else {
             throw APIErrors.invalidURL(url)
         }
         
         var urlComponents = URLComponents(url: apiURL, resolvingAgainstBaseURL: false)
-        urlComponents?.queryItems = params
+        urlComponents?.queryItems = parameters
         
         guard let requestURL = urlComponents?.url else {
-            throw APIErrors.invalidParameters(params ?? [])
+            throw APIErrors.invalidParameters(parameters ?? [])
         }
 
         var request = URLRequest(url: requestURL)
@@ -38,6 +43,6 @@ struct APIRequest: Request {
     }
     
     var description: String {
-        "\(method) - \(url)"
+        "\(method) - \(baseUrl + path)"
     }
 }
