@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import Lottie
 
 final class TopAlbumsViewController: UIViewController {
     
     private let viewModel: TopAlbumViewModel
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     private let tableView = UITableView()
+    private let lottieView = LottieAnimationView()
     private let sortMenu: SortMenu = .fromNib()
     private var isShowingSortMenu: Bool = false
     private var sortMenuTopConstraint: NSLayoutConstraint?
@@ -28,33 +30,41 @@ final class TopAlbumsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
      
+        view.backgroundColor = .darkGray
         navigationItem.title = "Top Albums"
         navigationController?.navigationBar.barTintColor = .black
+        navigationController?.navigationBar.tintColor = .black
     
         configureCollectionView()
-//        configureTableView()
+        configureLoaderView()
         configureSortMenu()
         configureRightBarButtonItem()
         
         viewModel.loadData()
     }
     
-    private func configureTableView() {
-        tableView.dataSource = self
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(TopAlbumTableViewCell.self, forCellReuseIdentifier: TopAlbumTableViewCell.description())
-        view.addSubview(tableView)
+    private func configureLoaderView() {
+        let name = "Spinner"
+        let loopMode: LottieLoopMode = .loop
+        let animation = LottieAnimation.named(name)
+        lottieView.animation = animation
+        lottieView.contentMode = .scaleAspectFit
+        lottieView.loopMode = loopMode
+        lottieView.play()
+
+        lottieView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(lottieView)
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            lottieView.heightAnchor.constraint(equalToConstant: 150),
+            lottieView.widthAnchor.constraint(equalToConstant: 150),
+            lottieView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            lottieView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
     }
     
     private func configureCollectionView() {
-        collectionView.backgroundColor = .darkGray
+        collectionView.backgroundColor = .clear
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -63,7 +73,7 @@ final class TopAlbumsViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 5),
         ])
@@ -110,7 +120,7 @@ final class TopAlbumsViewController: UIViewController {
 extension TopAlbumsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = view.window?.windowScene?.screen.bounds.width
-        return CGSize(width: width! / 2.0 - 10, height: 300)
+        return CGSize(width: width! / 2.0 - 20, height: 315)
     }
 }
 
@@ -143,7 +153,7 @@ extension TopAlbumsViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: TopAlbumTableViewCell.description(), for: indexPath) as! TopAlbumTableViewCell
         cell.albumLabel.text = album.name
         cell.artistNameLabel.text = album.artistName
-                
+
         return cell
     }
 }
@@ -151,6 +161,8 @@ extension TopAlbumsViewController: UITableViewDataSource {
 // MARK: - Top Album Delegate
 extension TopAlbumsViewController: TopAlbumViewModelDelegate {
     func dataFinishedLoading() {
+        lottieView.stop()
+        lottieView.isHidden = true
         collectionView.reloadData()
         tableView.reloadData()
     }

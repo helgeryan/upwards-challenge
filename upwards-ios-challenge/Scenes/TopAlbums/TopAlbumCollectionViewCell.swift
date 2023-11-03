@@ -21,7 +21,9 @@ class TopAlbumCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        contentView.layer.cornerRadius = 15
+        contentView.clipsToBounds = true
     }
     
     private func configure() {
