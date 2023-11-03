@@ -10,6 +10,7 @@ import UIKit
 final class TopAlbumsViewController: UIViewController {
     
     private let viewModel: TopAlbumViewModel
+    private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     private let tableView = UITableView()
     private let sortMenu: SortMenu = .fromNib()
     private var isShowingSortMenu: Bool = false
@@ -28,8 +29,10 @@ final class TopAlbumsViewController: UIViewController {
         super.viewDidLoad()
      
         navigationItem.title = "Top Albums"
+        navigationController?.navigationBar.barTintColor = .black
     
-        configureTableView()
+        configureCollectionView()
+//        configureTableView()
         configureSortMenu()
         configureRightBarButtonItem()
         
@@ -49,6 +52,23 @@ final class TopAlbumsViewController: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
+    
+    private func configureCollectionView() {
+        collectionView.backgroundColor = .darkGray
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.register(UINib(nibName: "TopAlbumCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: TopAlbumCollectionViewCell.description())
+        view.addSubview(collectionView)
+        
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
+            collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 5),
+        ])
+    }
+    
     
     private func configureSortMenu() {
         let sortTypes = AlbumSortType.allCases
@@ -87,6 +107,31 @@ final class TopAlbumsViewController: UIViewController {
 
 }
 
+extension TopAlbumsViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = view.window?.windowScene?.screen.bounds.width
+        return CGSize(width: width! / 2.0 - 10, height: 300)
+    }
+}
+
+extension TopAlbumsViewController: UICollectionViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return viewModel.albums.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let album = viewModel.albums[indexPath.row]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TopAlbumCollectionViewCell.description(), for: indexPath) as! TopAlbumCollectionViewCell
+        
+        cell.album = album
+        return cell
+    }
+}
+
 // MARK: - UITableViewDataSource
 extension TopAlbumsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -106,6 +151,7 @@ extension TopAlbumsViewController: UITableViewDataSource {
 // MARK: - Top Album Delegate
 extension TopAlbumsViewController: TopAlbumViewModelDelegate {
     func dataFinishedLoading() {
+        collectionView.reloadData()
         tableView.reloadData()
     }
 }
