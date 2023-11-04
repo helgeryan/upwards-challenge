@@ -6,39 +6,41 @@
 //
 
 import Foundation
-
-protocol TopAlbumViewModelDelegate {
-    func dataFinishedLoading()
-}
+import Combine
 
 final class TopAlbumViewModel {
-    var delegate: TopAlbumViewModelDelegate?
     private let iTunesAPI: ITunesAPI
-    var albums = [Album]() {
-        didSet {
-            delegate?.dataFinishedLoading()
-        }
-    }
+    @Published var albumsPublished: [Album]? = nil
+    @Published var isLoading: Bool = false
+    @Published var error: Error? = nil
     
     init(iTunesAPI: ITunesAPI) {
         self.iTunesAPI = iTunesAPI
     }
     
     func loadData() {
+        isLoading = true
+        error = nil
         iTunesAPI.getTopAlbums(limit: 10) { [weak self] res in
+          
             switch res {
             case .success(let data):
-                DispatchQueue.main.async {
-                    self?.albums = data.feed.results
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                    self?.albumsPublished = data.feed.results
+                    self?.isLoading = false
                 }
             case .failure(let err):
+                DispatchQueue.main.async {
+                    self?.error = err
+                    self?.isLoading = false
+                }
                 debugPrint(err)
             }
         }
     }
     
     func sortData(type: AlbumSortType) {
-        albums.sort(by: type.sort)
+        albumsPublished?.sort(by: type.sort)
     }
     
 }

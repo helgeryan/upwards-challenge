@@ -6,13 +6,17 @@
 //
 
 import UIKit
+import Combine
 import Lottie
 
 final class TopAlbumsViewController: UIViewController {
     
+    private var subscriptions: [AnyCancellable] = []
     private let viewModel: TopAlbumViewModel
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     private let lottieView = LottieAnimationView()
+    private let errorLabel = UILabel()
+    private let reloadButton = UIButton()
     private let sortMenu: SortMenu = .fromNib()
     private var isShowingSortMenu: Bool = false
     private var sortMenuTopConstraint: NSLayoutConstraint?
@@ -32,13 +36,52 @@ final class TopAlbumsViewController: UIViewController {
         view.backgroundColor = .darkGray
         navigationItem.title = "Top Albums"
     
+        // Configure the views
+        configureErrorState()
         configureCollectionView()
         configureLoaderView()
         configureSortMenu()
         configureRightBarButtonItem()
         
+        // Bind the data model to the view
+        bindViewModel()
+        
+        // Load the data
         viewModel.loadData()
     }
+    
+    // MARK: - Configure/View Layout
+    private func configureErrorState() {
+        errorLabel.textColor = .red
+            
+        errorLabel.numberOfLines = 0
+        errorLabel.font = .systemFont(ofSize: 15, weight: .semibold)
+        errorLabel.isHidden = true
+        errorLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(errorLabel)
+        
+        NSLayoutConstraint.activate([
+            errorLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 15),
+            errorLabel.heightAnchor.constraint(equalToConstant: 100),
+            errorLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            errorLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+        ])
+        
+        reloadButton.setTitle("Reload data", for: .normal)
+        reloadButton.isHidden = true
+        
+        reloadButton.addTarget(self, action: #selector(reloadData), for: .touchUpInside)
+        reloadButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(reloadButton)
+        
+        NSLayoutConstraint.activate([
+            reloadButton.widthAnchor.constraint(equalToConstant: 150),
+            reloadButton.heightAnchor.constraint(equalToConstant: 100),
+            reloadButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            reloadButton.topAnchor.constraint(equalTo: errorLabel.bottomAnchor, constant: 10),
+        ])
+    }
+    
     
     private func configureLoaderView() {
         let name = "Spinner"
@@ -61,6 +104,7 @@ final class TopAlbumsViewController: UIViewController {
     }
     
     private func configureCollectionView() {
+        collectionView.isHidden = true
         collectionView.backgroundColor = .clear
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -101,6 +145,47 @@ final class TopAlbumsViewController: UIViewController {
         
     }
     
+    // MARK: - Binding
+    private func bindViewModel() {
+        bindAlbums()
+        bindError()
+        bindLoading()
+    }
+    
+    private func bindAlbums() {
+        let albumsCancellable = viewModel.$albumsPublished.sink() { [weak self] _ in
+            self?.collectionView.isHidden = false
+            self?.collectionView.reloadData()
+        }
+        subscriptions.append(albumsCancellable)
+    }
+    
+    private func bindError() {
+        let errorCancellable = viewModel.$error.sink() { [weak self] error in
+            if let error = error as? APIErrors {
+                self?.errorLabel.text = error.localizedDescription
+                self?.errorLabel.isHidden = false
+                self?.reloadButton.isHidden = false
+            } else {
+                self?.errorLabel.isHidden = true
+                self?.reloadButton.isHidden = true
+            }
+        }
+        subscriptions.append(errorCancellable)
+    }
+    
+    private func bindLoading() {
+        let loadingCancellable = viewModel.$isLoading.sink() { [weak self] loading in
+            if loading {
+                self?.lottieView.isHidden = false
+                self?.lottieView.play()
+            }else {
+                self?.lottieView.stop()
+                self?.lottieView.isHidden = true
+            }
+        }
+        subscriptions.append(loadingCancellable)
+    }
     
     // MARK: - Actions
     
@@ -112,6 +197,9 @@ final class TopAlbumsViewController: UIViewController {
         })
     }
 
+    @objc private func reloadData() {
+        viewModel.loadData()
+    }
 }
 
 extension TopAlbumsViewController: UICollectionViewDelegateFlowLayout {
@@ -127,24 +215,20 @@ extension TopAlbumsViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.albums.count
+        if let albums = viewModel.albumsPublished {
+            return albums.count
+        }
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let album = viewModel.albums[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TopAlbumCollectionViewCell.description(), for: indexPath) as! TopAlbumCollectionViewCell
-        
-        cell.album = album
+        if let albums = viewModel.albumsPublished {
+            let album = albums[indexPath.row]
+            
+            cell.album = album
+        }
         return cell
-    }
-}
-
-// MARK: - Top Album Delegate
-extension TopAlbumsViewController: TopAlbumViewModelDelegate {
-    func dataFinishedLoading() {
-        lottieView.stop()
-        lottieView.isHidden = true
-        collectionView.reloadData()
     }
 }
 
