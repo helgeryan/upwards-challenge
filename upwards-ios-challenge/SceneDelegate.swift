@@ -23,7 +23,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let network = Network(sessionConfig: URLSessionConfiguration.default)
             let viewModel = TopAlbumViewModel(iTunesAPI: ITunesAPI(network: network))
             let topAlbumCtrl = TopAlbumsViewController(viewModel: viewModel)
-            viewModel.delegate = topAlbumCtrl
             let nav = UINavigationController(rootViewController: topAlbumCtrl)
             window?.rootViewController = nav
             window?.makeKeyAndVisible()
