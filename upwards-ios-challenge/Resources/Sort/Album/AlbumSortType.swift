@@ -8,13 +8,13 @@
 import Foundation
 
 enum AlbumSortType: CaseIterable, SortType {
-    case album
+    case albumId
     case title
     case artist
     
     var title: String {
         switch self {
-        case .album:
+        case .albumId:
             return "Album"
         case .title:
             return "Title"
@@ -25,7 +25,7 @@ enum AlbumSortType: CaseIterable, SortType {
     
     var sort: (Album, Album) -> Bool {
         switch self {
-        case .album:
+        case .albumId:
             return { return $0.id < $1.id }
         case .title:
             // Lowercase in case the album
