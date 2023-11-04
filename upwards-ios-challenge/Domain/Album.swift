@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Album
-struct Album: Decodable {
+struct Album: Decodable, Equatable {
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -32,6 +32,11 @@ struct Album: Decodable {
         } else {
             return false
         }
+    }
+    
+    static func == (lhs: Album, rhs: Album) -> Bool {
+        return
+            lhs.id == rhs.id
     }
 }
 
