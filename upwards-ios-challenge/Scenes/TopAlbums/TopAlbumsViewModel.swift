@@ -9,12 +9,12 @@ import Foundation
 import Combine
 
 final class TopAlbumViewModel {
-    private let iTunesAPI: ITunesAPI
+    private let iTunesAPI: APIClientProtocol
     @Published var albumsPublished: [Album]? = nil
     @Published var isLoading: Bool = false
     @Published var error: Error? = nil
     
-    init(iTunesAPI: ITunesAPI) {
+    init(iTunesAPI: APIClientProtocol) {
         self.iTunesAPI = iTunesAPI
     }
     
@@ -25,7 +25,8 @@ final class TopAlbumViewModel {
           
             switch res {
             case .success(let data):
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                DispatchQueue.main.async {
+                    debugPrint("Loaded")
                     self?.albumsPublished = data.feed.results
                     self?.isLoading = false
                 }
