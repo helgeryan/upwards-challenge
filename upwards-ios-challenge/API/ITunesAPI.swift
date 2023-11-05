@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class ITunesAPI {
+final class ITunesAPI: APIClientProtocol {
     
     private let network: Networking
     

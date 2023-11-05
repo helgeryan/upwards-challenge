@@ -19,7 +19,7 @@ final class Network: NSObject, Networking, URLSessionDelegate {
     init(sessionConfig: URLSessionConfiguration) {
         self.sessionConfig = sessionConfig
         super.init()
-        configureDecoder()
+        decoder.configureUpwardsDateDecodingStrategy(error: APIErrors.custom("Failed to decode date"))
     }
     
     func requestObject<T: Decodable>(_ router: ITunesRouter, completion: @escaping (Result<T, Error>) -> ()) {
@@ -53,24 +53,5 @@ final class Network: NSObject, Networking, URLSessionDelegate {
     private func addLog(_ router: ITunesRouter) -> ITunesRouter {
         os_log("%s", log: general, type: .debug, router.description)
         return router
-    }
-    
-    private func configureDecoder() {
-        let formatter = DateFormatter()
-        formatter.calendar = Calendar(identifier: .iso8601)
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.timeZone = TimeZone(secondsFromGMT: 0)
-        
-        decoder.dateDecodingStrategy = .custom({ (decoder) -> Date in
-            let container = try decoder.singleValueContainer()
-            let dateStr = try container.decode(String.self)
-
-            formatter.dateFormat = "yyyy-MM-dd"
-            if let date = formatter.date(from: dateStr) {
-                return date
-            }
-            
-            throw APIErrors.custom(dateStr)
-        })
     }
 }

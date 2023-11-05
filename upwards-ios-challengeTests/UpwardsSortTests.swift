@@ -7,6 +7,7 @@
 
 import XCTest
 import Foundation
+import Combine
 
 final class UpwardsSortTests: XCTestCase {
     

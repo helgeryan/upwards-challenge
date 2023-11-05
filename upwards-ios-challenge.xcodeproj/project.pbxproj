@@ -36,6 +36,17 @@
 		E63D3B612AF6DE5B00B7E84C /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2A3E526EFAA5C0093C1F3 /* Album.swift */; };
 		E63D3B622AF6DE6800B7E84C /* AlbumSortType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63D3B392AF4307800B7E84C /* AlbumSortType.swift */; };
 		E63D3B632AF6E36600B7E84C /* SortType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63D3B3B2AF430F200B7E84C /* SortType.swift */; };
+		E63D3B672AF70B3900B7E84C /* GetITunesMockResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = E63D3B662AF70B3900B7E84C /* GetITunesMockResponse.json */; };
+		E63D3B682AF70B5200B7E84C /* GetITunesMockResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = E63D3B662AF70B3900B7E84C /* GetITunesMockResponse.json */; };
+		E63D3B692AF70BD500B7E84C /* TopAlbumsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63D3B2D2AF4130F00B7E84C /* TopAlbumsViewModel.swift */; };
+		E63D3B6C2AF70DA500B7E84C /* MockITunesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63D3B6B2AF70DA500B7E84C /* MockITunesAPI.swift */; };
+		E63D3B6E2AF70DC900B7E84C /* ApiClientProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63D3B6D2AF70DC900B7E84C /* ApiClientProtocol.swift */; };
+		E63D3B6F2AF70DD000B7E84C /* ApiClientProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63D3B6D2AF70DC900B7E84C /* ApiClientProtocol.swift */; };
+		E63D3B702AF70DD400B7E84C /* MockITunesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63D3B6B2AF70DA500B7E84C /* MockITunesAPI.swift */; };
+		E63D3B712AF70EB900B7E84C /* APIErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2A3EA26EFB7210093C1F3 /* APIErrors.swift */; };
+		E63D3B732AF70FE800B7E84C /* UpwardsAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63D3B722AF70FE800B7E84C /* UpwardsAPITests.swift */; };
+		E63D3B752AF7119700B7E84C /* JsonDecoder+UpwardsDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63D3B742AF7119700B7E84C /* JsonDecoder+UpwardsDate.swift */; };
+		E63D3B762AF7129800B7E84C /* JsonDecoder+UpwardsDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63D3B742AF7119700B7E84C /* JsonDecoder+UpwardsDate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +88,11 @@
 		E63D3B502AF4A4CA00B7E84C /* ITunesApiAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITunesApiAction.swift; sourceTree = "<group>"; };
 		E63D3B582AF6DD3100B7E84C /* upwards-ios-challengeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "upwards-ios-challengeTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E63D3B5A2AF6DD3100B7E84C /* UpwardsSortTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpwardsSortTests.swift; sourceTree = "<group>"; };
+		E63D3B662AF70B3900B7E84C /* GetITunesMockResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetITunesMockResponse.json; sourceTree = "<group>"; };
+		E63D3B6B2AF70DA500B7E84C /* MockITunesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockITunesAPI.swift; sourceTree = "<group>"; };
+		E63D3B6D2AF70DC900B7E84C /* ApiClientProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClientProtocol.swift; sourceTree = "<group>"; };
+		E63D3B722AF70FE800B7E84C /* UpwardsAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpwardsAPITests.swift; sourceTree = "<group>"; };
+		E63D3B742AF7119700B7E84C /* JsonDecoder+UpwardsDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JsonDecoder+UpwardsDate.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,11 +134,13 @@
 		CED2A3E226EFA9450093C1F3 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				E63D3B502AF4A4CA00B7E84C /* ITunesApiAction.swift */,
+				E63D3B642AF70B0E00B7E84C /* ITunesApiActions */,
 				E63D3B4E2AF4A4C100B7E84C /* ITunesRouter.swift */,
 				CED2A3E326EFA9610093C1F3 /* ITunesAPI.swift */,
 				CED2A3EA26EFB7210093C1F3 /* APIErrors.swift */,
 				CED2A3F426F017330093C1F3 /* Network.swift */,
+				E63D3B6B2AF70DA500B7E84C /* MockITunesAPI.swift */,
+				E63D3B6D2AF70DC900B7E84C /* ApiClientProtocol.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -196,6 +214,7 @@
 			children = (
 				E63D3B332AF41BB400B7E84C /* UIView+extensions.swift */,
 				E63D3B4C2AF49B9000B7E84C /* UIView+IBDesignables.swift */,
+				E63D3B742AF7119700B7E84C /* JsonDecoder+UpwardsDate.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -232,8 +251,26 @@
 			isa = PBXGroup;
 			children = (
 				E63D3B5A2AF6DD3100B7E84C /* UpwardsSortTests.swift */,
+				E63D3B722AF70FE800B7E84C /* UpwardsAPITests.swift */,
 			);
 			path = "upwards-ios-challengeTests";
+			sourceTree = "<group>";
+		};
+		E63D3B642AF70B0E00B7E84C /* ITunesApiActions */ = {
+			isa = PBXGroup;
+			children = (
+				E63D3B652AF70B1D00B7E84C /* MockResponses */,
+				E63D3B502AF4A4CA00B7E84C /* ITunesApiAction.swift */,
+			);
+			path = ITunesApiActions;
+			sourceTree = "<group>";
+		};
+		E63D3B652AF70B1D00B7E84C /* MockResponses */ = {
+			isa = PBXGroup;
+			children = (
+				E63D3B662AF70B3900B7E84C /* GetITunesMockResponse.json */,
+			);
+			path = MockResponses;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -326,6 +363,7 @@
 				CEE8745326E818C500A269DA /* Assets.xcassets in Resources */,
 				E63D3B432AF4838100B7E84C /* TopAlbumCollectionViewCell.xib in Resources */,
 				E63D3B4B2AF48E5C00B7E84C /* Spinner.json in Resources */,
+				E63D3B672AF70B3900B7E84C /* GetITunesMockResponse.json in Resources */,
 				E63D3B372AF41C2100B7E84C /* SortMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -334,6 +372,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E63D3B682AF70B5200B7E84C /* GetITunesMockResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,6 +390,8 @@
 				E63D3B422AF4838100B7E84C /* TopAlbumCollectionViewCell.swift in Sources */,
 				E63D3B4D2AF49B9000B7E84C /* UIView+IBDesignables.swift in Sources */,
 				CED2A3F026F000F60093C1F3 /* TopAlbumsViewController.swift in Sources */,
+				E63D3B752AF7119700B7E84C /* JsonDecoder+UpwardsDate.swift in Sources */,
+				E63D3B6E2AF70DC900B7E84C /* ApiClientProtocol.swift in Sources */,
 				E63D3B3A2AF4307800B7E84C /* AlbumSortType.swift in Sources */,
 				CED2A3E426EFA9610093C1F3 /* ITunesAPI.swift in Sources */,
 				CED2A3F526F017330093C1F3 /* Network.swift in Sources */,
@@ -362,6 +403,7 @@
 				E63D3B4F2AF4A4C100B7E84C /* ITunesRouter.swift in Sources */,
 				E63D3B302AF41AA400B7E84C /* SortMenu.swift in Sources */,
 				CEE8744A26E818C000A269DA /* AppDelegate.swift in Sources */,
+				E63D3B6C2AF70DA500B7E84C /* MockITunesAPI.swift in Sources */,
 				CEE8744C26E818C000A269DA /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -370,8 +412,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E63D3B732AF70FE800B7E84C /* UpwardsAPITests.swift in Sources */,
 				E63D3B5B2AF6DD3100B7E84C /* UpwardsSortTests.swift in Sources */,
+				E63D3B712AF70EB900B7E84C /* APIErrors.swift in Sources */,
+				E63D3B762AF7129800B7E84C /* JsonDecoder+UpwardsDate.swift in Sources */,
+				E63D3B6F2AF70DD000B7E84C /* ApiClientProtocol.swift in Sources */,
+				E63D3B692AF70BD500B7E84C /* TopAlbumsViewModel.swift in Sources */,
 				E63D3B612AF6DE5B00B7E84C /* Album.swift in Sources */,
+				E63D3B702AF70DD400B7E84C /* MockITunesAPI.swift in Sources */,
 				E63D3B622AF6DE6800B7E84C /* AlbumSortType.swift in Sources */,
 				E63D3B632AF6E36600B7E84C /* SortType.swift in Sources */,
 			);
