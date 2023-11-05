@@ -114,12 +114,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		CED2A3DB26EFA84A0093C1F3 /* Domain */ = {
+		CED2A3DB26EFA84A0093C1F3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				CED2A3E526EFAA5C0093C1F3 /* Album.swift */,
 			);
-			path = Domain;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		CED2A3DC26EFA87F0093C1F3 /* Network */ = {
@@ -188,7 +188,7 @@
 				CEE8744B26E818C000A269DA /* SceneDelegate.swift */,
 				CEE8745226E818C500A269DA /* Assets.xcassets */,
 				CED2A3E226EFA9450093C1F3 /* API */,
-				CED2A3DB26EFA84A0093C1F3 /* Domain */,
+				CED2A3DB26EFA84A0093C1F3 /* Models */,
 				CED2A3DC26EFA87F0093C1F3 /* Network */,
 				E63D3B312AF41B9300B7E84C /* Resources */,
 				CED2A3ED26F000BF0093C1F3 /* Scenes */,
@@ -593,8 +593,11 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.weecare.upwards-ios-challenge";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -612,8 +615,11 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.weecare.upwards-ios-challenge";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
