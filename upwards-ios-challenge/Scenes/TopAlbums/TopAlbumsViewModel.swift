@@ -26,16 +26,14 @@ final class TopAlbumViewModel {
             case .success(let data):
                 // Mocked in 2 seconds to show the spinner/lottie animation
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                    debugPrint("Loaded")
                     self?.isLoading = false
                     self?.albumsPublished = data.feed.results
                 }
             case .failure(let err):
-                DispatchQueue.main.async {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                     self?.isLoading = false
                     self?.error = err
                 }
-                debugPrint(err)
             }
         }
     }

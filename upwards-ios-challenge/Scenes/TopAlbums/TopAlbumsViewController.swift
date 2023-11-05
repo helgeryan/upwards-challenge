@@ -159,9 +159,13 @@ final class TopAlbumsViewController: UIViewController {
     }
     
     private func bindAlbums() {
-        let albumsCancellable = viewModel.$albumsPublished.sink() { [weak self] _ in
-            self?.collectionView.isHidden = false
-            self?.collectionView.reloadData()
+        let albumsCancellable = viewModel.$albumsPublished.sink() { [weak self] albums in
+            if albums != nil {
+                self?.collectionView.isHidden = false
+                self?.collectionView.reloadData()
+            } else {
+                self?.collectionView.isHidden = true
+            }
         }
         subscriptions.append(albumsCancellable)
     }
