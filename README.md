@@ -23,8 +23,6 @@ Your task is to checkout the provided code and provide a submission that accompl
 - Bugfixes & Improvements
 - Testing
 
-
-
 ## Running Project
 
 Steps to running the Upwards Challenge Project
@@ -61,3 +59,16 @@ Lottie is an animation framework that uses json files to customize animation fil
 Link: https://github.com/airbnb/lottie-ios
 
 Combine was used to bind the view model of the Top Albums to the view so that the need for delegates between the model and view are not required. The same goal can be achieved by Frameworks such as RxSwift, but I wanted to test the ability to use a new frameowrk like Combine. If I had more time I would have liked to bind the DataSource with Combine so that the `UICollectionViewDataSource` is not inherited in `TopAlbumsViewController`
+
+### Improvements
+
+- `ITunesAPIClientProtocol` Definining this protocol allows to define the `ITunesAPI` along with the `MockITunesAPI`. Using the MockAPI I am able to test the view model in isolation with mock api responses instead of having to call API directly in the test.
+- Create more defined custom errors to define the errors specifically to why they occurred. 
+- Create a loading spinner so the user is aware there is an action occuring in the background
+- Create an error state to present the error to the user, and a button to reload the data if an error occurs.
+
+### Testing
+
+- Sort methods are tested with Unit Tests comparing the sorted albums with the expected results
+- View Model was tested with a `MockITunesApi` that grabs from a mock json file
+- Manually tested UI by comparing mock to the the application.
