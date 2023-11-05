@@ -9,12 +9,12 @@ import Foundation
 import Combine
 
 final class TopAlbumViewModel {
-    private let iTunesAPI: APIClientProtocol
+    private let iTunesAPI: ITunesAPIClientProtocol
     @Published var albumsPublished: [Album]? = nil
     @Published var isLoading: Bool = false
     @Published var error: Error? = nil
     
-    init(iTunesAPI: APIClientProtocol) {
+    init(iTunesAPI: ITunesAPIClientProtocol) {
         self.iTunesAPI = iTunesAPI
     }
     
