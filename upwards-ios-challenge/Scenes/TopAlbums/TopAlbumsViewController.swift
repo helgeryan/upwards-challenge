@@ -13,7 +13,7 @@ final class TopAlbumsViewController: UIViewController {
     
     private var subscriptions: [AnyCancellable] = []
     private let viewModel: TopAlbumViewModel
-    private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     private let lottieView = LottieAnimationView()
     private let errorLabel = UILabel()
     private let reloadButton = UIButton()
@@ -37,11 +37,7 @@ final class TopAlbumsViewController: UIViewController {
         navigationItem.title = "Top Albums"
     
         // Configure the views
-        configureErrorState()
-        configureCollectionView()
-        configureLoaderView()
-        configureSortMenu()
-        configureRightBarButtonItem()
+        configureSubViews()
         
         // Bind the data model to the view
         bindViewModel()
@@ -51,6 +47,14 @@ final class TopAlbumsViewController: UIViewController {
     }
     
     // MARK: - Configure/View Layout
+    private func configureSubViews() {
+        configureErrorState()
+        configureCollectionView()
+        configureLoaderView()
+        configureSortMenu()
+        configureRightBarButtonItem()
+    }
+    
     private func configureErrorState() {
         errorLabel.textColor = .red
             
@@ -126,6 +130,8 @@ final class TopAlbumsViewController: UIViewController {
         sortMenu.setupMenu(delegate: self, sortTypes: sortTypes)
         sortMenu.backgroundColor = .white
         sortMenu.alpha = 0
+        sortMenu.cornerRadius = 5
+        sortMenu.clipsToBounds = true
         sortMenu.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(sortMenu)
         sortMenuTopConstraint = sortMenu.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)

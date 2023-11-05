@@ -29,6 +29,7 @@ class SortMenu: UIView {
         tableView.register(SortMenuTableViewCell.self, forCellReuseIdentifier: SortMenuTableViewCell.description())
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.bounces = false
         self.sortTypes = sortTypes
         self.delegate = delegate
     }

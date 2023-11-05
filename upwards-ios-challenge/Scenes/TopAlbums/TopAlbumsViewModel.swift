@@ -22,18 +22,18 @@ final class TopAlbumViewModel {
         isLoading = true
         error = nil
         iTunesAPI.getTopAlbums(limit: 10) { [weak self] res in
-          
             switch res {
             case .success(let data):
-                DispatchQueue.main.async {
+                // Mocked in 2 seconds to show the spinner/lottie animation
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                     debugPrint("Loaded")
-                    self?.albumsPublished = data.feed.results
                     self?.isLoading = false
+                    self?.albumsPublished = data.feed.results
                 }
             case .failure(let err):
                 DispatchQueue.main.async {
-                    self?.error = err
                     self?.isLoading = false
+                    self?.error = err
                 }
                 debugPrint(err)
             }
@@ -43,5 +43,4 @@ final class TopAlbumViewModel {
     func sortData(type: AlbumSortType) {
         albumsPublished?.sort(by: type.sort)
     }
-    
 }
