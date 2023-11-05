@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ITunesRouter {
+protocol UpwardsRouter {
     var method: HTTPMethod { get }
     var path: String { get }
     var baseUrl: String { get }
@@ -18,7 +18,7 @@ protocol ITunesRouter {
     var description: String { get }
 }
 
-extension ITunesRouter {
+extension UpwardsRouter {
     func asURLRequest() throws -> URLRequest {
         let url = baseUrl + path
         guard let apiURL = URL(string: url) else {

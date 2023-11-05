@@ -22,7 +22,7 @@ final class Network: NSObject, Networking, URLSessionDelegate {
         decoder.configureUpwardsDateDecodingStrategy(error: APIErrors.custom("Failed to decode date"))
     }
     
-    func requestObject<T: Decodable>(_ router: ITunesRouter, completion: @escaping (Result<T, Error>) -> ()) {
+    func requestObject<T: Decodable>(_ router: UpwardsRouter, completion: @escaping (Result<T, Error>) -> ()) {
         requestData(router) { res in
             completion(
                 res.flatMap { data in
@@ -34,7 +34,7 @@ final class Network: NSObject, Networking, URLSessionDelegate {
         }
     }
     
-    func requestData(_ router: ITunesRouter, completion: @escaping (Result<Data, Error>) -> ()) {
+    func requestData(_ router: UpwardsRouter, completion: @escaping (Result<Data, Error>) -> ()) {
         let task = session.dataTask(with: try! addLog(router).asURLRequest()) { (data, res, err) in
             guard
                 let httpResponse = res as? HTTPURLResponse,
@@ -50,7 +50,7 @@ final class Network: NSObject, Networking, URLSessionDelegate {
         task.resume()
     }
 
-    private func addLog(_ router: ITunesRouter) -> ITunesRouter {
+    private func addLog(_ router: UpwardsRouter) -> UpwardsRouter {
         os_log("%s", log: general, type: .debug, router.description)
         return router
     }

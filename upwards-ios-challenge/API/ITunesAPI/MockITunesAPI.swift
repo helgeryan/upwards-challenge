@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class MockITunesAPI: APIClientProtocol {
+final class MockITunesAPI: ITunesAPIClientProtocol {
     func getTopAlbums(limit: Int = 10, completion: @escaping (Result<AlbumFeed, Error>) -> ())  {
         getMockData(mockFileName: "GetITunesMockResponse", completion: completion)
     }

@@ -11,7 +11,7 @@ public enum ITunesApiAction {
     case getAlbums(count: Int)
 }
 
-extension ITunesApiAction: ITunesRouter {
+extension ITunesApiAction: UpwardsRouter {
     var method: HTTPMethod {
         switch self {
         case .getAlbums:

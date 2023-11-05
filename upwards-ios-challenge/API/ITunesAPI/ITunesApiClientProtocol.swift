@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol APIClientProtocol {
+protocol ITunesAPIClientProtocol {
     func getTopAlbums(limit: Int, completion: @escaping (Result<AlbumFeed, Error>) -> ())
 }

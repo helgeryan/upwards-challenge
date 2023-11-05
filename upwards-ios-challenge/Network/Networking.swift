@@ -8,6 +8,6 @@
 import Foundation
 
 protocol Networking {
-    func requestObject<T: Decodable>(_ router: ITunesRouter, completion: @escaping (Result<T, Error>) -> ())
-    func requestData(_ router: ITunesRouter, completion: @escaping (Result<Data, Error>) -> ())
+    func requestObject<T: Decodable>(_ router: UpwardsRouter, completion: @escaping (Result<T, Error>) -> ())
+    func requestData(_ router: UpwardsRouter, completion: @escaping (Result<Data, Error>) -> ())
 }
