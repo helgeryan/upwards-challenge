@@ -66,6 +66,7 @@ Combine was used to bind the view model of the Top Albums to the view so that th
 - Create more defined custom errors to define the errors specifically to why they occurred. 
 - Create a loading spinner so the user is aware there is an action occuring in the background
 - Create an error state to present the error to the user, and a button to reload the data if an error occurs.
+- Created a generic `UpwardsRouter` protocol instead of building it out in one constructor in the originally designed `APIRequest`. Having an enumeration that conforms to the `UpwardsRouter` ensures that when a new API call is created that all the required data for the request is set in the APIAction file. This can be used in the case other APIs outside of ITunes are used across the app.
 
 ### Testing
 
